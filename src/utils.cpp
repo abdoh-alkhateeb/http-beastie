@@ -10,12 +10,18 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.set(http::field::server, "http-beastie");
   res.set(http::field::content_type, "text/html");
 
-  if (req.method() == http::verb::get && req.target() == "/") {
-    res.result(http::status::ok);
-    res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+  if (req.method() == http::verb::get) {
+    if (req.target() == "/") {
+      res.result(http::status::ok);
+      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+    } else {
+      res.result(http::status::not_found);
+      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+    }
   } else {
-    res.result(http::status::not_found);
-    res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+    res.result(http::status::method_not_allowed);
+    res.set(http::field::allow, "GET");
+    res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
   }
 
   res.prepare_payload();
