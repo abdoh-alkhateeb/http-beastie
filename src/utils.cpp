@@ -27,14 +27,17 @@ http::response<http::string_body> handle_request(
     res.set(http::field::content_type, "text/html");
     res.keep_alive(req.keep_alive());
 
-    if (req.method() == http::verb::get && req.target() == "/") {
+    std::string target = std::string(req.target());
+
+    if (req.method() == http::verb::get &&
+    (target == "/" || target == "/index.html")) {
+    res.result(http::status::ok);
+    res.body() = read_file("../static/index.html");
+}
+    else if (req.method() == http::verb::get && target == "/elreedy") {
         res.result(http::status::ok);
-        res.body() = read_file("static/index.html");
-    } 
-    else if (req.method() == http::verb::get && req.target() == "/elreedy") {
-        res.result(http::status::ok);
-        res.body() = read_file("static/elreedy.html");
-    } 
+        res.body() = read_file("../static/elreedy.html");
+    }
     else {
         res.result(http::status::not_found);
         res.body() = "<h1>404 Not Found</h1>";
