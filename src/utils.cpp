@@ -1,5 +1,18 @@
 #include "utils.hpp"
+#include <fstream>
+#include <sstream>
 
+std::string read_file(const std::string& path) {
+    std::ifstream file(path);
+    std::stringstream buffer;
+    
+    if (!file.is_open()) {
+        return "File not found";
+    }
+
+    buffer << file.rdbuf();
+    return buffer.str();
+}
 namespace beast = boost::beast;
 namespace http = beast::http;
 
