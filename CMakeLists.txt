@@ -1,0 +1,8 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+PROJECT(Beastie)
+
+find_package(Boost REQUIRED)
+
+ADD_EXECUTABLE(Beast src/main.cpp src/utils.cpp)
+TARGET_INCLUDE_DIRECTORIES(Beast PRIVATE include ${Boost_INCLUDE_DIRS})
+
