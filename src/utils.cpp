@@ -1,7 +1,23 @@
 #include "utils.hpp"
 
+
 namespace beast = boost::beast;
 namespace http = beast::http;
+
+std::string FileTOString(std::string Path){
+  std::ifstream File;
+  File.open(Path);
+  if(!File.is_open()){
+    return "File not found.";
+  }
+  std::string Line;
+  std::string Result;
+  while(std::getline(File, Line)){
+    Result += Line + "\n";  
+  }
+  File.close();
+  return Result;
+}
 
 http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
   http::response<http::string_body> res;
