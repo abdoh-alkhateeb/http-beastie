@@ -33,6 +33,9 @@ http::response<http::string_body> handle_request(
     if (req.target() == "/") {
       res.result(http::status::ok);
       res.body() = read_file("static/index.html");
+    } else if (req.target() == "/salama") {
+      res.result(http::status::ok);
+      res.body() = read_file("static/salama.html");
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
