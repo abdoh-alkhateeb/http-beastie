@@ -1,0 +1,367 @@
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #0b1120, #1e293b);
+            color: white;
+        }
+
+        /* Container */
+        .profile-page {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, .35),
+                inset 0 1px 0 rgba(255, 255, 255, .08);
+        }
+
+        /* Banner */
+        .banner {
+            height: 290px;
+            background:
+                linear-gradient(rgba(10, 20, 40, .3), rgba(10, 20, 40, .45)),
+                url("/static/banner.jpeg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .banner:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0b1120 5%, transparent 70%);
+        }
+
+        /* Profile */
+        .profile-pic {
+            width: 185px;
+            height: 185px;
+            border-radius: 50%;
+            background: url("/static/pfp.jpeg");
+            background-size: cover;
+            background-position: center;
+            border: 6px solid white;
+            margin-top: -92px;
+            margin-left: 60px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .4);
+        }
+
+        .content {
+            padding: 25px 60px 60px;
+        }
+
+        .bio h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .role {
+            color: #60a5fa;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .bio p {
+            max-width: 700px;
+            line-height: 1.85;
+            color: #cbd5e1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 22px 0 30px;
+        }
+
+        .tech {
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, .18);
+            border: 1px solid rgba(96, 165, 250, .3);
+            color: #bfdbfe;
+            font-weight: 600;
+            font-size: .92rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+        }
+
+        .secondary {
+            background: rgba(255, 255, 255, .07);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, .12);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .stats {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 22px;
+        }
+
+        .stat {
+            padding: 28px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .stat h2 {
+            font-size: 2rem;
+            margin-bottom: 6px;
+        }
+
+        .stat span {
+            color: #94a3b8;
+        }
+
+        .section-title {
+            margin: 55px 0 24px;
+            font-size: 1.55rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 14px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .skill {
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: rgba(16, 185, 129, .15);
+            border: 1px solid rgba(16, 185, 129, .25);
+            color: #d1fae5;
+            font-weight: 600;
+        }
+
+        .disclaimer {
+            margin-top: 45px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            text-align: center;
+            font-size: .9rem;
+            font-style: italic;
+            color: #94a3b8;
+            opacity: .8;
+        }
+
+        @media(max-width:760px) {
+            .profile-pic {
+                margin: auto;
+                margin-top: -90px;
+            }
+
+            .content {
+                text-align: center;
+                padding: 30px;
+            }
+
+            .bio p {
+                margin: auto;
+            }
+
+            .tech-tags,
+            .skills,
+            .actions {
+                justify-content: center;
+            }
+
+            .bio h1 {
+                font-size: 2.35rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-page">
+
+        <div class="banner"></div>
+
+        <div class="profile-pic"></div>
+
+        <div class="content">
+
+            <div class="bio">
+                <h1>Khaled Dawoud</h1>
+
+                <div class="role">
+                    Embedded Systems Engineer, Software Developer, Computer Architect
+                </div>
+
+                <div class="tech-tags">
+                    <span class="tech">C++</span>
+                    <span class="tech">Embedded Systems</span>
+                    <span class="tech">Computer Architecture</span>
+                    <span class="tech">Machine Learning</span>
+                    <span class="tech">Algorithms</span>
+                </div>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <br>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+
+                <div class="actions" style="margin-top:28px;">
+                    <button class="btn primary">Follow</button>
+                    <button class="btn secondary">Message</button>
+                </div>
+
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <h2>47</h2>
+                    <span>Repositories</span>
+                </div>
+
+                <div class="stat">
+                    <h2>15+</h2>
+                    <span>Research Projects</span>
+                </div>
+
+                <div class="stat">
+                    <h2>8K</h2>
+                    <span>Community Followers</span>
+                </div>
+
+                <div class="stat">
+                    <h2>120</h2>
+                    <span>Hardware Builds</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">About</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Systems Engineering</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Research Focus</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim
+                        veniam quis nostrud exercitation ullamco.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Technical Interests</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Technical Skills</h2>
+
+            <div class="skills">
+                <span class="skill">Advanced C++</span>
+                <span class="skill">Linux</span>
+                <span class="skill">Qt Widgets</span>
+                <span class="skill">Debugging</span>
+                <span class="skill">Boost.asio</span>
+                <span class="skill">Boost.beast</span>
+                <span class="skill">Prompt Engineering</span>
+                <span class="skill">Unit Testing</span>
+                <span class="skill">Version Control</span>
+                <span class="skill">CMake</span>
+            </div>
+            <div class="disclaimer">
+                This information may or may not be completely fabricated.
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
