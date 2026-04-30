@@ -36,8 +36,8 @@ http::response<http::string_body> handle_request(const http::request<http::strin
         res.result(http::status::ok);
         res.body() = file_contents;
       }
-    } else if (req.target() == "/baboa") {
-      const std::string file_contents = read_file_contents("static/baboa.html");
+    } else if (req.target() == "/bavly") {
+      const std::string file_contents = read_file_contents("static/bavly.html");
       if (file_contents.empty()) {
         res.result(http::status::not_found);
         res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
