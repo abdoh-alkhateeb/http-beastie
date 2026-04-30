@@ -28,8 +28,14 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
-      res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+      const std::string file_contents = read_file_contents("static/index.html");
+      if (file_contents.empty()) {
+        res.result(http::status::not_found);
+        res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+      } else {
+        res.result(http::status::ok);
+        res.body() = file_contents;
+      }
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
