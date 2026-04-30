@@ -1,7 +1,21 @@
 #include "utils.hpp"
 
+#include <fstream>
+#include <sstream>
+
 namespace beast = boost::beast;
 namespace http = beast::http;
+
+std::string read_file_contents(const std::string& path) {
+  std::ifstream file(path, std::ios::binary);
+  if (!file) {
+    return "";
+  }
+
+  std::ostringstream content;
+  content << file.rdbuf();
+  return content.str();
+}
 
 http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
   http::response<http::string_body> res;
