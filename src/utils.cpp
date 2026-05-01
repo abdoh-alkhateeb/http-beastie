@@ -37,7 +37,7 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
     else if (req.target() == "/hashem") {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align:center;\">Haya Hashem</h1>";
+      res.body() = read_file("../static/hashem.html");
     }
 
     else {
@@ -54,6 +54,19 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.prepare_payload();
   return res;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
