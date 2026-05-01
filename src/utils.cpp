@@ -17,15 +17,18 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
       res.result(http::status::ok);
-      res.boyd() = read_file("../static/index.html")
+      res.body() = read_file("../static/index.html")
 
       if(res.body().empty()) {
         res.result(http::status::internal_server_error);
         res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
       }
+    } elif(req.target() == "/Elsayed") {
+      res.result(http::status::ok);
+      res.body() = read_file("../static/elsayed.html");
     } else {
-      res.result(http::status::not_found);
-      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+        res.result(http::status::not_found);
+        res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
   } else {
     res.result(http::status::method_not_allowed);
