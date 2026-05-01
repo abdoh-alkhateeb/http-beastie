@@ -29,14 +29,22 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.set(http::field::content_type, "text/html");
 
   if (req.method() == http::verb::get) {
+
     if (req.target() == "/") {
       res.result(http::status::ok);
+      res.body() = read_file("../static/index.html");
+    }
 
-res.body() = read_file("../static/index.html");
-    } else {
+    else if (req.target() == "/hashem") {
+      res.result(http::status::ok);
+      res.body() = "<h1 style=\"text-align:center;\">Haya Hashem</h1>";
+    }
+
+    else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
+
   } else {
     res.result(http::status::method_not_allowed);
     res.set(http::field::allow, "GET");
@@ -46,6 +54,11 @@ res.body() = read_file("../static/index.html");
   res.prepare_payload();
   return res;
 }
+
+
+
+
+
 
 
 
