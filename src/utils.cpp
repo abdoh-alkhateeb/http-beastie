@@ -25,7 +25,11 @@ http::response<http::string_body> handle_request(const http::request<http::strin
     if (req.target() == "/") {
       res.result(http::status::ok);
       res.body() = read_file("static/index.html");
-    } else {
+    }
+	else if(req.target()=="/kamel"){
+		res.result(http::status::ok);
+		res.body()=read_file("static/kamel.html");}
+   else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
