@@ -1,4 +1,6 @@
-#include "utils.hpp"
+#include "../include/utils.hpp"
+#include <fstream>
+#include <sstream>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -15,10 +17,22 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
-    } else {
-      res.result(http::status::not_found);
-      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+      res.body() = read_file("static/index.html");
+
+      if(res.body().empty()) {
+        res.result(http::status::internal_server_error);
+        res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+      }
+    }
+    
+    if(req.target() == "/elsayed") {
+      res.result(http::status::ok);
+      res.body() = read_file("static/elsayed.html");
+
+      if(res.body().empty()) {
+        res.result(http::status::internal_server_error);
+        res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+      }
     }
   } else {
     res.result(http::status::method_not_allowed);
@@ -28,4 +42,17 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
   res.prepare_payload();
   return res;
+}
+
+std::string read_file(const std::string& filePath) {
+  std::ifstream file(filePath, std::ios::in | std::ios::binary);
+  
+  if(!file) {
+    return "";
+  }
+
+  std::ostringstream contents;
+  contents << file.rdbuf();
+
+  return contents.str();
 }
