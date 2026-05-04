@@ -7,7 +7,7 @@ std::string fileToString(const std::string& path) {
     std::ifstream file(path);
 
     if (!file.is_open()) {
-        return "couldnt open file";
+        return "could not open file";
     }
 
     std::string line;
