@@ -1,4 +1,7 @@
 #include "utils.hpp"
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -15,7 +18,10 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+      res.body() = read_file("static/index.html");
+    } else if (req.target() == "/abdelaaty") {
+      res.result(http::status::ok);
+      res.body() = read_file("static/abdelaaty.html");
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
@@ -28,4 +34,14 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
   res.prepare_payload();
   return res;
+}
+
+std::string read_file(const std::string& path) {
+  std::ifstream file(path);
+  if (!file.is_open()) {
+    throw std::runtime_error("Failed to open file: " + path);
+  }
+  std::stringstream buffer;
+  buffer << file.rdbuf();
+  return buffer.str();
 }
