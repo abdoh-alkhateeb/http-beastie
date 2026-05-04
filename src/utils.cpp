@@ -3,6 +3,23 @@
 namespace beast = boost::beast;
 namespace http = beast::http;
 
+std::string fileToString(const std::string& path) {
+    std::ifstream file(path);
+
+    if (!file.is_open()) {
+        return "couldnt open file";
+    }
+
+    std::string line;
+    std::string result;
+
+    while (std::getline(file, line)) {
+        result += line;
+        result += '\n';
+    }
+    return result;
+}
+
 http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
   http::response<http::string_body> res;
 
