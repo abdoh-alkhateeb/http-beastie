@@ -1,7 +1,22 @@
 #include "utils.hpp"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+using namespace std;
 
 namespace beast = boost::beast;
 namespace http = beast::http;
+
+string utility (const string& filepath) {
+  ifstream file(filepath);
+  if (!file.is_open()) {
+    cerr << "Error: Could not open file " << filepath << endl;
+    return "";
+  }
+  string content((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
+  return content;
+}
 
 http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
   http::response<http::string_body> res;
