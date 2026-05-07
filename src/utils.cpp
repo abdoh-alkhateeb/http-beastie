@@ -31,9 +31,22 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.set(http::field::content_type, "text/html");
 
   if (req.method() == http::verb::get) {
-  if (req.target() == "/") {
 
-    string body = read_file("../static/index.html");
+
+   if (req.target() == "/hashem") {
+    string body = read_file("../static/hashem.html");
+
+    if (body.empty()) {
+      res.result(http::status::not_found);
+      res.body() = "<h1>404 Not Found</h1>";
+    } else {
+      res.result(http::status::ok);
+      res.body() = body;
+    }
+ } 
+
+ else if (req.target() == "/") {
+  string body = read_file("../static/index.html");
 
     if (body.empty()) {
       res.result(http::status::not_found);
