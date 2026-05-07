@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "../include/utils.hpp"
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -31,14 +31,20 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 }
 
 std::string fileContents(std::string path) {
-    std::string content;
+    std::string temp;
+    std::string content = "";
     std::ifstream input;
     input.open(path);
     if (!input) {
       std::cerr << "Invalid Path" << std::endl;
       return ""; 
     }
-    while (!input.eof()) getline(input, content);
+    while (!input.eof()) {
+      getline(input, temp);
+      content += temp;
+      if (!input.eof()) content += '\n';
+    }
 
     input.close();
+    return content;
 }
