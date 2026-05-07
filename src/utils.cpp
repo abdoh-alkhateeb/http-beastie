@@ -1,9 +1,13 @@
 #include "utils.hpp"
-
+#include <fstream>
+#include <iostream>
+#include <stdexcept>  
 namespace beast = boost::beast;
 namespace http = beast::http;
+using namespace std;
 
-http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
+http::response<http::string_body> handle_request(const http::request<http::string_body>& req)
+ {
   http::response<http::string_body> res;
 
   res.version(req.version());
@@ -12,20 +16,52 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.set(http::field::server, "http-beastie");
   res.set(http::field::content_type, "text/html");
 
-  if (req.method() == http::verb::get) {
-    if (req.target() == "/") {
+  if (req.method() == http::verb::get)
+   {
+    if (req.target() == "/") 
+    {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
-    } else {
+      res.body() = readFile("/root/http-beastie/static/index.html");
+    }
+     else if  (req.target()=="/AbdelMoniem")
+    {
+      res.result(http::status::ok);
+      res.body() = readFile("/root/http-beastie/static/AbdelMoniem.html");
+    } 
+    else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
-  } else {
-    res.result(http::status::method_not_allowed);
-    res.set(http::field::allow, "GET");
-    res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
+  }
+   else
+    {
+         res.result(http::status::method_not_allowed);
+           res.set(http::field::allow, "GET");
+          res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
+    }
+    res.prepare_payload();
+  return res;
   }
 
-  res.prepare_payload();
-  return res;
-}
+
+  
+
+
+string readFile(const string& filePath)
+ {
+  fstream file;
+    file.open(filePath, ios::in |ios::out);
+    if (!file.is_open())
+       {
+          throw runtime_error("Could not open file: " + filePath);
+      }
+      string result;
+     while(!file.eof())
+       {
+          string line;
+          getline(file,line);
+          result += line+ "\n";
+       }
+       file.close();
+       return result;
+ }
