@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Abo Hamar's Bio</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .box {
+            padding: 40px 60px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            user-select: none;
+            text-align: center;
+        }
+
+        .box:hover {
+            transform: scale(1.05) rotate(-1deg);
+            background: rgba(255,255,255,0.18);
+        }
+
+        .small {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ali Abo Hamar's Bio</h1>
+
+    <div class="box" onclick="changeText(this)">
+        <div id="mainText">I am just a student.. I guess.</div>
+        <div class="small">(click me)</div>
+    </div>
+
+    <script>
+        const texts = [
+            "I am just a student.. I guess.",
+            "Maybe caffeine is my real degree.",
+            "Assignments are temporary. Sleep deprivation is eternal.",
+            "Ctrl + Z does not work in exams.",
+            "One more tutorial video surely won't hurt."
+        ];
+
+        let index = 0;
+
+        function changeText(element) {
+            index = (index + 1) % texts.length;
+            document.getElementById("mainText").innerText = texts[index];
+        }
+    </script>
+
+</body>
+</html>
