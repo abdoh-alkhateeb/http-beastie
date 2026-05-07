@@ -23,6 +23,11 @@ http::response<http::string_body> handle_request(const http::request<http::strin
       res.result(http::status::ok);
       res.body() = readFile("/root/http-beastie/static/index.html");
     }
+    else if(req.target() == "/AbdelMoniem")
+    {
+      res.result(http::status::ok);
+      res.body() = readFile("/root/http-beastie/static/AbdelMoniem.html");
+    }
     
     else {
       res.result(http::status::not_found);
