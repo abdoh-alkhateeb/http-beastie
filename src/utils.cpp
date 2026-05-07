@@ -28,8 +28,11 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
-    } else {
+      res.body() = /*"<h1 style=\"text-align: center;\">CSCE 1102</h1>";*/ read_file("../static/index.html");
+    }  else if (req.target() == "/hazem") {
+                res.result(http::status::ok);
+                res.body() = read_file("../static/hazem.html");
+    }else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
