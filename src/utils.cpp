@@ -26,18 +26,25 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.set(http::field::content_type, "text/html");
 
   if (req.method() == http::verb::get) {
-    if (req.target() == "/") {
-      res.result(http::status::ok);
-       res.body() = read_file("static/index.html");    } else {
-      res.result(http::status::not_found);
-      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
-    }
+
+  if (req.target() == "/") {
+    res.result(http::status::ok);
+    res.body() = read_file("static/index.html");
+
+  } else if (req.target() == "/ibrahim") {
+    res.result(http::status::ok);
+    res.body() = read_file("static/khaled.html");
+
   } else {
-    res.result(http::status::method_not_allowed);
-    res.set(http::field::allow, "GET");
-    res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
+    res.result(http::status::not_found);
+    res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
   }
 
+} else {
+  res.result(http::status::method_not_allowed);
+  res.set(http::field::allow, "GET");
+  res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
+}
   res.prepare_payload();
   return res;
 }
