@@ -32,6 +32,10 @@ http::response<http::string_body> handle_request(const http::request<http::strin
       string file_content = utility("static/index.html");
       res.result(http::status::ok);
       res.body() = file_content;
+    } else if (req.target() == "/abdelaal") {
+      string file_content = utility("static/abdelaal.html");
+      res.result(http::status::ok);
+      res.body() = file_content;
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
