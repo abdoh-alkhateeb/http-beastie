@@ -29,9 +29,9 @@ http::response<http::string_body> handle_request(const http::request<http::strin
     if (req.target() == "/") {
       res.result(http::status::ok);
       res.body() = read_file("static/index.html");
-    } else if (req.target() == "/issa") {
+    } else if (req.target() == "/eissa") {
       res.result(http::status::ok);
-      res.body() = read_file("static/issa.html");
+      res.body() = read_file("static/eissa.html");
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
