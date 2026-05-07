@@ -29,3 +29,16 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   res.prepare_payload();
   return res;
 }
+
+std::string fileContents(std::string path) {
+    std::string content;
+    std::ifstream input;
+    input.open(path);
+    if (!input) {
+      std::cerr << "Invalid Path" << std::endl;
+      return ""; 
+    }
+    while (!input.eof()) getline(input, content);
+
+    input.close();
+}
