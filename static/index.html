@@ -3,192 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSCE 1102 Course Page</title>
+    <title>Adham Negmeldin Bio</title>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-
       body {
-        line-height: 1.6;
+        margin: 0;
+        font-family: Arial, sans-serif;
         background: #f4f7fb;
         color: #333;
       }
 
-      header {
-        background: linear-gradient(135deg, #4f46e5, #06b6d4);
-        color: white;
-        padding: 80px 20px;
+      .container {
+        max-width: 800px;
+        margin: 80px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         text-align: center;
       }
 
-      header h1 {
-        font-size: 3rem;
+      h1 {
+        color: #4f46e5;
         margin-bottom: 10px;
       }
 
-      header p {
-        font-size: 1.2rem;
-        opacity: 0.9;
+      h2 {
+        color: #06b6d4;
+        margin-bottom: 25px;
       }
 
-      .btn {
+      p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+      .tags {
+        margin-top: 25px;
+      }
+
+      .tag {
         display: inline-block;
-        margin-top: 20px;
-        padding: 12px 24px;
-        background: white;
-        color: #4f46e5;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-      }
-
-      .btn:hover {
-        background: #e0e7ff;
-      }
-
-      section {
-        padding: 60px 20px;
-        max-width: 1100px;
-        margin: auto;
-      }
-
-      .features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-      }
-
-      .card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-5px);
-      }
-
-      .card h3 {
-        margin-bottom: 10px;
-        color: #4f46e5;
-      }
-
-      .student-box {
-        margin-top: 40px;
-        text-align: center;
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-      }
-
-      input {
-        padding: 10px;
-        width: 250px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin-right: 10px;
-      }
-
-      button {
+        margin: 6px;
         padding: 10px 16px;
-        border: none;
-        background: #4f46e5;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background: #3730a3;
-      }
-
-      #output {
-        margin-top: 20px;
-        font-size: 1.2rem;
-        color: #4f46e5;
+        background: #e0e7ff;
+        color: #3730a3;
+        border-radius: 20px;
         font-weight: bold;
-      }
-
-      footer {
-        text-align: center;
-        padding: 20px;
-        background: #111827;
-        color: #9ca3af;
-        margin-top: 40px;
       }
     </style>
   </head>
 
   <body>
-    <header>
-      <h1>CSCE 1102</h1>
-      <p>Introduction to Computer Science Concepts and Problem Solving</p>
-      <a href="#features" class="btn">View Course Highlights</a>
-    </header>
+    <div class="container">
+      <h1>Adham Negmeldin</h1>
+      <h2>CS Lab Student</h2>
 
-    <section id="features">
-      <h2 style="text-align: center; margin-bottom: 40px">Course Highlights</h2>
+      <p>
+        Hi, my name is Adham Negmeldin. I am a student in CS Lab, and I enjoy
+        learning about computers, programming, and how technology works behind
+        the scenes.
+      </p>
 
-      <div class="features">
-        <div class="card">
-          <h3>Programming Basics</h3>
-          <p>
-            Learn fundamental programming concepts including variables, loops,
-            and conditionals.
-          </p>
-        </div>
+      <p>
+        Outside of class, I like gaming, playing padel, and improving my ping
+        pong skills. I enjoy activities that are competitive, fun, and require
+        quick thinking.
+      </p>
 
-        <div class="card">
-          <h3>Problem Solving</h3>
-          <p>
-            Develop computational thinking skills to solve real-world problems
-            efficiently.
-          </p>
-        </div>
+      <p>
+        I am also interested in artificial intelligence and want to learn more
+        about how AI can be used to solve problems and build useful tools.
+      </p>
 
-        <div class="card">
-          <h3>Hands-on Practice</h3>
-          <p>
-            Apply your knowledge through coding exercises and small projects.
-          </p>
-        </div>
+      <div class="tags">
+        <span class="tag">Gaming</span>
+        <span class="tag">Padel</span>
+        <span class="tag">Ping Pong</span>
+        <span class="tag">AI</span>
+        <span class="tag">CS Lab</span>
       </div>
-
-      <div class="student-box">
-        <h2>Student Recognition</h2>
-        <p style="margin: 15px 0">Enter a student name:</p>
-
-        <input type="text" id="nameInput" placeholder="Enter name..." />
-        <button onclick="showMessage()">Submit</button>
-
-        <div id="output"></div>
-      </div>
-    </section>
-
-    <footer>
-      <p>© 2026 CSCE 1102 Course Page. All rights reserved.</p>
-    </footer>
-
-    <script>
-      function showMessage() {
-        const name = document.getElementById("nameInput").value.trim();
-        const output = document.getElementById("output");
-
-        if (name === "") {
-          output.textContent = "Please enter a name.";
-        } else {
-          output.textContent = name + " is a great student!";
-        }
-      }
-    </script>
+    </div>
   </body>
 </html>
