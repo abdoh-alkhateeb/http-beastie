@@ -32,7 +32,7 @@ http::response<http::string_body> handle_request(const http::request<http::strin
       res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
     } else {
       res.result(http::status::not_found);
-      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+      res.body() = read_file("static/index.html");
     }
   } else {
     res.result(http::status::method_not_allowed);
