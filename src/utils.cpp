@@ -1,4 +1,5 @@
 #include "utils.hpp"
+#include <fstream>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -15,7 +16,8 @@ http::response<http::string_body> handle_request(const http::request<http::strin
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
       res.result(http::status::ok);
-      res.body() = "<h1 style=\"text-align: center;\">CSCE 1102</h1>";
+      std::string contents = read_file("static/index.html");
+      res.body() = contents;
     } else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
@@ -28,4 +30,18 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
   res.prepare_payload();
   return res;
+}
+
+
+std::string read_file(const std::string& path){
+
+  std::ifstream file;
+  file.open(path);
+  if(!file) return "";
+
+  std::ostringstream ss;
+
+  ss << file.rdbuf();
+
+  return ss.str();
 }
