@@ -1,4 +1,5 @@
 #include "utils.hpp"
+
 #include <fstream>
 #include <sstream>
 namespace beast = boost::beast;
@@ -17,7 +18,8 @@ std::string read_file(const std::string& path) {
   return buffer.str();
 }
 
-http::response<http::string_body> handle_request(const http::request<http::string_body>& req) {
+http::response<http::string_body> handle_request(
+    const http::request<http::string_body>& req) {
   http::response<http::string_body> res;
 
   res.version(req.version());
@@ -28,21 +30,22 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 
   if (req.method() == http::verb::get) {
     if (req.target() == "/") {
-  res.result(http::status::ok);
-  res.body() = read_file("static/index.html");
+      res.result(http::status::ok);
+      res.body() = read_file("static/index.html");
 
-} else if (req.target() == "/elgharabawy") {
-  res.result(http::status::ok);
-  res.body() = read_file("static/elgharabawy.html");
+    } else if (req.target() == "/elgharabawy") {
+      res.result(http::status::ok);
+      res.body() = read_file("static/elgharabawy.html");
 
-} else {
-  res.result(http::status::not_found);
-  res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
-}
+    } else {
+      res.result(http::status::not_found);
+      res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
+    }
   } else {
     res.result(http::status::method_not_allowed);
     res.set(http::field::allow, "GET");
-    res.body() = "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
+    res.body() =
+        "<h1 style=\"text-align: center;\">405 Method Not Allowed</h1>";
   }
 
   res.prepare_payload();
